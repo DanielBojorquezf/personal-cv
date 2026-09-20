@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Sessions vs JWT</title>
+  <desc id="desc">A session cookie looks up user state in Redis. A JWT is verified with a key and stays self-contained.</desc>
+  <rect width="1600" height="900" fill="#f5f8fd"/>
+  <line x1="800" y1="80" x2="800" y2="820" stroke="#d6e0ee" stroke-width="3"/>
+
+  <text x="400" y="120" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="36" font-weight="700" fill="#173b6c">Session</text>
+  <rect x="120" y="280" width="240" height="150" rx="12" fill="#fff" stroke="#d6e0ee"/>
+  <text x="240" y="340" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" font-weight="700" fill="#122f57">Browser</text>
+  <text x="240" y="378" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">cookie: sid</text>
+  <path d="M370 355 H470" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="470,345 500,355 470,365" fill="#149ddd"/>
+  <text x="430" y="335" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="16" fill="#149ddd">lookup</text>
+  <rect x="510" y="280" width="260" height="150" rx="12" fill="#fff" stroke="#d6e0ee"/>
+  <text x="640" y="340" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" font-weight="700" fill="#122f57">Redis store</text>
+  <text x="640" y="378" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">user 42</text>
+  <text x="400" y="560" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" fill="#173b6c">Server remembers. Revoke by deleting the row.</text>
+
+  <text x="1200" y="120" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="36" font-weight="700" fill="#173b6c">JWT</text>
+  <rect x="900" y="250" width="260" height="210" rx="12" fill="#fff" stroke="#d6e0ee"/>
+  <text x="1030" y="300" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#122f57">header</text>
+  <text x="1030" y="345" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#122f57">payload</text>
+  <text x="1030" y="390" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#122f57">signature</text>
+  <path d="M1170 355 H1260" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="1260,345 1290,355 1260,365" fill="#149ddd"/>
+  <text x="1220" y="335" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="16" fill="#149ddd">verify</text>
+  <rect x="1300" y="280" width="200" height="150" rx="12" fill="#173b6c"/>
+  <text x="1400" y="365" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" font-weight="700" fill="#fff">signing key</text>
+  <text x="1200" y="560" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="22" fill="#173b6c">Token is self-contained until it expires.</text>
+</svg>

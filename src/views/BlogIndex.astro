@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BLOG_CATEGORIES, formatPostDate, getCategoryLabel, getPostUrlSlug, getPublishedPosts } from '../lib/blog';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const posts = await getPublishedPosts(lang);
+const blogPath = localizedPath(lang, '/blog');
+---
+
+<BaseLayout current="blog" title={t.meta.blogTitle} description={t.meta.blogDescription}>
+  <section class="blog">
+    <div class="container">
+      <div class="section-title">
+        <h2>{t.blog.title}</h2>
+        <p>{t.blog.intro}</p>
+      </div>
+
+      <nav class="blog-filters" aria-label={t.blog.filterLabel}>
+        <a href={blogPath} data-blog-filter="all">{t.blog.all}</a>
+        {BLOG_CATEGORIES.map((category) => (
+          <a href={`${blogPath}?category=${category.slug}`} data-blog-filter={category.slug}>
+            {getCategoryLabel(category.slug, lang)}
+          </a>
+        ))}
+      </nav>
+
+      {posts.length === 0 ? (
+        <p class="blog-empty">{t.blog.empty}</p>
+      ) : (
+        <>
+          <p class="blog-empty" data-blog-empty hidden>{t.blog.emptyCategory}</p>
+          <div class="blog-list">
+            {posts.map((post) => {
+              const href = `${blogPath}/${getPostUrlSlug(post)}`;
+              return (
+                <article class="blog-card" data-post-category={post.data.category}>
+                  {post.data.heroImage && (
+                    <a class="blog-card-media" href={href}>
+                      <img src={post.data.heroImage} alt={post.data.heroImageAlt ?? post.data.title} />
+                    </a>
+                  )}
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <a class="blog-category" href={`${blogPath}?category=${post.data.category}`}>
+                        {getCategoryLabel(post.data.category, lang)}
+                      </a>
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {formatPostDate(post.data.pubDate, lang)}
+                      </time>
+                    </div>
+                    <h3>
+                      <a href={href}>{post.data.title}</a>
+                    </h3>
+                    <p>{post.data.description}</p>
+                    {post.data.tags.length > 0 && (
+                      <ul class="blog-tags">
+                        {post.data.tags.map((tag) => (
+                          <li>{tag}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category') || 'all';
+    const filters = document.querySelectorAll('[data-blog-filter]');
+    const cards = document.querySelectorAll('[data-post-category]');
+    const empty = document.querySelector('[data-blog-empty]');
+    let visible = 0;
+
+    filters.forEach((el) => {
+      el.classList.toggle('active', el.getAttribute('data-blog-filter') === category);
+    });
+
+    cards.forEach((el) => {
+      const match = category === 'all' || el.getAttribute('data-post-category') === category;
+      el.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    if (empty) empty.hidden = visible !== 0;
+  })();
+</script>

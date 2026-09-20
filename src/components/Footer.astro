@@ -1,19 +1,18 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Daniel Bojorquez</span></strong>
+        &copy; {t.footer.copyright} <strong><span>Daniel Bojorquez</span></strong>
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Template by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        {t.footer.templateBy} <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End  Footer -->
-  
+  </footer>
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  

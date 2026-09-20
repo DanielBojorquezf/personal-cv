@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Kafka vs RabbitMQ vs SQS</title>
+  <desc id="desc">Kafka is a partitioned log, RabbitMQ routes through an exchange to queues, and SQS is a managed queue with a visibility timeout.</desc>
+  <rect width="1600" height="900" fill="#f5f8fd"/>
+  <text x="800" y="80" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="34" font-weight="700" fill="#173b6c">Message backbones</text>
+
+  <text x="270" y="160" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="28" font-weight="700" fill="#173b6c">Kafka</text>
+  <rect x="70" y="200" width="400" height="70" rx="8" fill="#173b6c"/>
+  <text x="270" y="245" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#fff">partitioned log + offsets</text>
+  <rect x="90" y="360" width="170" height="70" rx="8" fill="#fff" stroke="#d6e0ee"/>
+  <text x="175" y="405" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="16" fill="#122f57">Group A</text>
+  <rect x="280" y="360" width="170" height="70" rx="8" fill="#fff" stroke="#d6e0ee"/>
+  <text x="365" y="405" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="16" fill="#122f57">Group B</text>
+  <path d="M175 360 V270 H365 V360" stroke="#149ddd" stroke-width="3" fill="none"/>
+  <text x="270" y="520" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">Replay by offset</text>
+
+  <text x="800" y="160" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="28" font-weight="700" fill="#173b6c">RabbitMQ</text>
+  <rect x="610" y="200" width="160" height="70" rx="8" fill="#fff" stroke="#d6e0ee"/>
+  <text x="690" y="245" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#122f57">Producer</text>
+  <rect x="830" y="190" width="180" height="90" rx="45" fill="#173b6c"/>
+  <text x="920" y="245" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#fff">Exchange</text>
+  <path d="M770 235 H830" stroke="#149ddd" stroke-width="4"/>
+  <rect x="720" y="400" width="150" height="70" rx="8" fill="#e4edf9"/>
+  <text x="795" y="445" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#122f57">Queue 1</text>
+  <rect x="930" y="400" width="150" height="70" rx="8" fill="#e4edf9"/>
+  <text x="1005" y="445" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#122f57">Queue 2</text>
+  <path d="M900 280 L795 400" stroke="#149ddd" stroke-width="3"/>
+  <path d="M940 280 L1005 400" stroke="#149ddd" stroke-width="3"/>
+  <text x="800" y="520" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">Smart routing</text>
+
+  <text x="1330" y="160" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="28" font-weight="700" fill="#173b6c">SQS</text>
+  <rect x="1160" y="200" width="150" height="70" rx="8" fill="#fff" stroke="#d6e0ee"/>
+  <text x="1235" y="245" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#122f57">Producer</text>
+  <rect x="1360" y="200" width="180" height="70" rx="8" fill="#173b6c"/>
+  <text x="1450" y="245" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#fff">Queue</text>
+  <path d="M1310 235 H1360" stroke="#149ddd" stroke-width="4"/>
+  <rect x="1360" y="400" width="180" height="70" rx="8" fill="#e4edf9"/>
+  <text x="1450" y="445" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#122f57">Worker</text>
+  <path d="M1450 270 V400" stroke="#149ddd" stroke-width="3"/>
+  <text x="1330" y="520" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">Visibility timeout</text>
+</svg>

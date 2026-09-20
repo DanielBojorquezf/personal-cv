@@ -1,120 +1,23 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { serviceIcons, useTranslations } from '../i18n/translations';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
 <section id="services" class="services">
   <div class="container">
     <div class="section-title">
-      <h2>Services</h2>
-      <p>
-        Offering a wide range of services to meet your web development and
-        technology needs, with a focus on quality and client satisfaction.
-      </p>
+      <h2>{t.services.title}</h2>
+      <p>{t.services.body}</p>
     </div>
     <div class="row">
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        <div class="icon"><i class="bi bi-card-checklist"></i></div>
-        <h4 class="title"><a href="">Web Scraping</a></h4>
-        <p class="description">
-          Developing robust web scraping applications to gather and analyze data
-          efficiently.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        <div class="icon"><i class="bi bi-bar-chart"></i></div>
-        <h4 class="title"><a href="">LMS Development</a></h4>
-        <p class="description">
-          Building comprehensive Learning Management Systems tailored to your
-          educational needs.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="300"
-      >
-        <div class="icon"><i class="bi bi-binoculars"></i></div>
-        <h4 class="title"><a href="">Landing Pages</a></h4>
-        <p class="description">
-          Designing and developing engaging landing pages to effectively capture
-          leads and drive conversions.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="400"
-      >
-        <div class="icon"><i class="bi bi-brightness-high"></i></div>
-        <h4 class="title"><a href="">WhatsApp Bots</a></h4>
-        <p class="description">
-          Creating automated WhatsApp bots to enhance customer interaction and
-          streamline communication.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="500"
-      >
-        <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-        <h4 class="title"><a href="">Payment Systems</a></h4>
-        <p class="description">
-          Integrating secure payment systems to facilitate seamless online
-          transactions.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="600"
-      >
-        <div class="icon"><i class="bi bi-person-badge"></i></div>
-        <h4 class="title"><a href="">CRM Development</a></h4>
-        <p class="description">
-          Developing custom CRM systems to manage client relationships and
-          improve business processes.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="700"
-      >
-        <div class="icon"><i class="bi bi-file-earmark-richtext"></i></div>
-        <h4 class="title"><a href="">Blog Development</a></h4>
-        <p class="description">
-          Creating dynamic blogs with easy-to-use content management systems.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="800"
-      >
-        <div class="icon"><i class="bi bi-card-text"></i></div>
-        <h4 class="title"><a href="">Wedding Invitations</a></h4>
-        <p class="description">
-          Designing beautiful and personalized wedding invitations to make your
-          special day memorable.
-        </p>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 icon-box"
-        data-aos="fade-up"
-        data-aos-delay="900"
-      >
-        <div class="icon"><i class="bi bi-diagram-3"></i></div>
-        <h4 class="title"><a href="">ERP Systems</a></h4>
-        <p class="description">
-          Developing Enterprise Resource Planning systems to streamline and
-          automate your business processes.
-        </p>
-      </div>
+      {t.services.items.map((item, index) => (
+        <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay={(index + 1) * 100}>
+          <div class="icon"><i class={`bi ${serviceIcons[index]}`}></i></div>
+          <h4 class="title"><a href="">{item.title}</a></h4>
+          <p class="description">{item.description}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>

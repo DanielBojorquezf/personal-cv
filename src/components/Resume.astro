@@ -1,98 +1,64 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
 <section id="resume" class="resume">
   <div class="container">
     <div class="section-title">
-      <h2>Resume</h2>
+      <h2>{t.resume.title}</h2>
     </div>
     <div class="row">
       <div class="col-lg-6" data-aos="fade-up">
-        <h3 class="resume-title">Sumary</h3>
+        <h3 class="resume-title">{t.resume.summary}</h3>
         <div class="resume-item pb-0">
           <h4>Daniel Bojorquez</h4>
-          <p>
-            <em
-              >Experienced Full Stack Developer skilled in developing HTML
-              editors with drag and drop functionality, web scraping
-              applications, LMS (Learning Management Systems), landing pages,
-              WhatsApp bots, payment systems, CRM, blogs, and more. I have
-              worked on these projects both independently and as part of teams
-              from different countries, integrating diverse technologies and
-              practices to deliver high-quality solutions.</em>
-          </p>
+          <p><em>{t.resume.summaryText}</em></p>
           <ul>
-            <li>Hermosillo Sonora, México</li>
+            <li>Hermosillo, Sonora, México</li>
             <li>(662) 297-1219</li>
             <li>danielbojorquezf@gmail.com</li>
           </ul>
         </div>
-        <h3 class="resume-title">Education</h3>
+        <h3 class="resume-title">{t.resume.education}</h3>
         <div class="resume-item">
-          <h4>Computer Systems Engineer</h4>
-          <h5>AUGUST 2015 — DECEMBER 2019</h5>
-          <p><em>Instituto Tecnológico de Hermosillo (ITH), Hermosillo</em></p>
-          <p>
-            Acquired Knowledge: Java, PHP, C# /.NET, Python (Basic), Assembly
-          </p>
+          <h4>{t.resume.edu1Title}</h4>
+          <h5>{t.resume.edu1Date}</h5>
+          <p><em>{t.resume.edu1School}</em></p>
+          <p>{t.resume.edu1Body}</p>
         </div>
         <div class="resume-item">
-          <h4>Programming Technician</h4>
-          <h5>AUGUST 2012 — MAY 2015</h5>
-          <p><em>CBTIS 11, Hermosillo</em></p>
-          <p>Basic knowledge in: C, PHP, Android Studio, Java, Access</p>
+          <h4>{t.resume.edu2Title}</h4>
+          <h5>{t.resume.edu2Date}</h5>
+          <p><em>{t.resume.edu2School}</em></p>
+          <p>{t.resume.edu2Body}</p>
         </div>
       </div>
       <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-        <h3 class="resume-title">Professional Experience</h3>
+        <h3 class="resume-title">{t.resume.experience}</h3>
         <div class="resume-item">
-          <h4>Full Stack Developer</h4>
-          <h5>MAY 2022 — PRESENT</h5>
-          <p><em>Seagage</em></p>
+          <h4>{t.resume.job1Title}</h4>
+          <h5>{t.resume.job1Date}</h5>
+          <p><em>{t.resume.job1Company}</em></p>
           <ul>
-            <li>
-              Frontend: SvelteJS / Angular 9 to 18, NextJs (React) and ReactJS.
-            </li>
-            <li>
-              Backend: PHP (Laravel / Phalcon) / MySQL / Docker / ExpressJS.
-            </li>
-            <li>
-              DevOps: Github actions, Docker, Jenkins, AWS (s3, ECS, EC2, ECR,
-              Route 53, Cloudfront, Lambda functions, etc).
-            </li>
-            <li>
-              Extra: Report exports (XLS, .CSV, .TSV, .PDF and .PPTX), HTML /
-              CSS builder development, Linux server management, etc.
-            </li>
+            {t.resume.job1Items.map((item) => <li>{item}</li>)}
           </ul>
         </div>
         <div class="resume-item">
-          <h4>Full Stack Web Developer</h4>
-          <h5>DECEMBER 2019 — PRESENT</h5>
-          <p><em>Powdevs / Seagage, Hermosillo</em></p>
+          <h4>{t.resume.job2Title}</h4>
+          <h5>{t.resume.job2Date}</h5>
+          <p><em>{t.resume.job2Company}</em></p>
           <ul>
-            <li>
-              Web development: HTML5 / CSS3 / jQuery / Bootstrap / Angular 7+,
-              SvelteJS, Laravel 9+, ExpressJS.
-            </li>
-            <li>
-              Extra: Data scraping with SlimerJS / PHP / PostgreSQL / Cron Jobs,
-              AWS (basic).
-            </li>
+            {t.resume.job2Items.map((item) => <li>{item}</li>)}
           </ul>
         </div>
         <div class="resume-item">
-          <h4>Full Stack Developer</h4>
-          <h5>SEPTEMBER 2017 — DECEMBER 2019</h5>
-          <p><em>Rivka Development, Hermosillo</em></p>
+          <h4>{t.resume.job3Title}</h4>
+          <h5>{t.resume.job3Date}</h5>
+          <p><em>{t.resume.job3Company}</em></p>
           <ul>
-            <li>
-              Web development: AngularJS / PHP (Laravel) API / MySQL, ExpressJS
-              (basic).
-            </li>
-            <li>
-              Mobile Development: Ionic (Angular 7) / PHP (Laravel) API / MySQL.
-            </li>
-            <li>
-              Extra: Data scraping with SlimerJS / PHP / PostgreSQL / Cron Jobs.
-            </li>
+            {t.resume.job3Items.map((item) => <li>{item}</li>)}
           </ul>
         </div>
       </div>

@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatPostDate, getCategoryLabel } from '../lib/blog';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homePath = localizedPath(lang, '/');
+const blogPath = localizedPath(lang, '/blog');
+---
+
+<BaseLayout
+  current="blog"
+  title={`${post.data.title} | Daniel Bojorquez`}
+  description={post.data.description}
+>
+  <section class="blog-post">
+    <div class="container">
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href={homePath}>{t.blog.home}</a></li>
+          <li><a href={blogPath}>{t.blog.title}</a></li>
+          <li>{post.data.title}</li>
+        </ol>
+      </div>
+
+      <article>
+        <div class="section-title">
+          <h2>{post.data.title}</h2>
+          <p>
+            <a class="blog-category" href={`${blogPath}?category=${post.data.category}`}>
+              {getCategoryLabel(post.data.category, lang)}
+            </a>
+            {' · '}
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatPostDate(post.data.pubDate, lang)}
+            </time>
+            {post.data.updatedDate && (
+              <>
+                {` · ${t.blog.updated} `}
+                <time datetime={post.data.updatedDate.toISOString()}>
+                  {formatPostDate(post.data.updatedDate, lang)}
+                </time>
+              </>
+            )}
+          </p>
+        </div>
+
+        {post.data.heroImage && (
+          <figure class="blog-hero">
+            <img src={post.data.heroImage} alt={post.data.heroImageAlt ?? post.data.title} />
+          </figure>
+        )}
+
+        {post.data.tags.length > 0 && (
+          <ul class="blog-tags">
+            {post.data.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )}
+
+        <div class="blog-content">
+          <Content />
+        </div>
+
+        <p class="blog-back">
+          <a href={blogPath}><i class="bx bx-left-arrow-alt"></i> {t.blog.back}</a>
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

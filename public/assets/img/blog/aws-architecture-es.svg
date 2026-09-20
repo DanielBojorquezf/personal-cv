@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Del edge al c&#243;mputo en AWS</title>
+  <desc id="desc">Usuario a Route 53 a CloudFront, luego S3 para est&#225;ticos o API Gateway/ALB hacia ECS, EC2 o Lambda en una VPC privada.</desc>
+  <rect width="1600" height="900" fill="#f5f8fd"/>
+  <text x="800" y="80" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="34" font-weight="700" fill="#173b6c">Del edge al c&#243;mputo</text>
+
+  <circle cx="120" cy="430" r="48" fill="#173b6c"/>
+  <text x="120" y="436" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="16" fill="#fff">Usuario</text>
+  <path d="M168 430 H250" stroke="#149ddd" stroke-width="5"/>
+  <rect x="250" y="390" width="200" height="80" rx="40" fill="#fff" stroke="#149ddd" stroke-width="3"/>
+  <text x="350" y="438" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#173b6c">Route 53</text>
+  <path d="M450 430 H530" stroke="#149ddd" stroke-width="5"/>
+  <rect x="530" y="380" width="240" height="100" rx="12" fill="#149ddd"/>
+  <text x="650" y="440" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#fff">CloudFront</text>
+
+  <path d="M650 480 V560 H430 V620" stroke="#149ddd" stroke-width="4" fill="none"/>
+  <rect x="320" y="620" width="220" height="80" rx="8" fill="#fff" stroke="#d6e0ee"/>
+  <text x="430" y="668" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#122f57">S3 est&#225;tico</text>
+
+  <path d="M770 430 H850" stroke="#149ddd" stroke-width="5"/>
+  <rect x="850" y="380" width="260" height="100" rx="12" fill="#173b6c"/>
+  <text x="980" y="440" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#fff">API Gateway / ALB</text>
+
+  <rect x="1180" y="220" width="340" height="460" rx="16" fill="#fff" stroke="#173b6c" stroke-width="3"/>
+  <text x="1350" y="270" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#173b6c">VPC privada</text>
+  <rect x="1220" y="310" width="260" height="70" rx="8" fill="#e4edf9"/>
+  <text x="1350" y="354" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#122f57">ECS</text>
+  <rect x="1220" y="410" width="260" height="70" rx="8" fill="#e4edf9"/>
+  <text x="1350" y="454" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#122f57">EC2</text>
+  <rect x="1220" y="510" width="260" height="70" rx="8" fill="#e4edf9"/>
+  <text x="1350" y="554" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="20" fill="#122f57">Lambda</text>
+  <path d="M1110 430 H1180" stroke="#149ddd" stroke-width="5"/>
+</svg>

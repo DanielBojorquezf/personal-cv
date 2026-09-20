@@ -1,9 +1,12 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="hero-container" data-aos="fade-in">
       <h1>Daniel Bojorquez</h1>
-      <p>I'm <span class="typed" data-typed-items="Full Stack Developer, Technology Enthusiast, Freelancer, Problem Solver"></span></p>
+      <p>{t.hero.prefix} <span class="typed" data-typed-items={t.hero.typed}></span></p>
     </div>
-</section><!-- End Hero -->
-  
+</section>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Forward proxy vs reverse proxy</title>
+  <desc id="desc">A forward proxy sits in front of clients. A reverse proxy sits in front of app servers.</desc>
+  <rect width="1600" height="900" fill="#040b14"/>
+  <text x="800" y="90" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="34" font-weight="700" fill="#f5f8fd">Same word, opposite jobs</text>
+
+  <rect x="80" y="180" width="220" height="90" rx="45" fill="#f5f8fd"/>
+  <text x="190" y="235" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#122f57">Clients</text>
+  <path d="M320 225 H470" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="470,215 500,225 470,235" fill="#149ddd"/>
+  <rect x="510" y="160" width="500" height="130" rx="12" fill="#d9e2ef"/>
+  <text x="760" y="215" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="28" font-weight="700" fill="#173b6c">Forward proxy</text>
+  <text x="760" y="255" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">hides clients</text>
+  <path d="M1030 225 H1180" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="1180,215 1210,225 1180,235" fill="#149ddd"/>
+  <rect x="1220" y="180" width="280" height="90" rx="45" fill="#f5f8fd"/>
+  <text x="1360" y="235" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#122f57">Internet</text>
+
+  <rect x="80" y="560" width="220" height="90" rx="45" fill="#f5f8fd"/>
+  <text x="190" y="615" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#122f57">Users</text>
+  <path d="M320 605 H470" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="470,595 500,605 470,615" fill="#149ddd"/>
+  <rect x="510" y="540" width="500" height="130" rx="12" fill="#d9e2ef"/>
+  <text x="760" y="595" text-anchor="middle" font-family="Raleway, Arial, sans-serif" font-size="28" font-weight="700" fill="#173b6c">Reverse proxy</text>
+  <text x="760" y="635" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="18" fill="#1f5297">hides origins</text>
+  <path d="M1030 605 H1180" stroke="#149ddd" stroke-width="6"/>
+  <polygon points="1180,595 1210,605 1180,615" fill="#149ddd"/>
+  <rect x="1220" y="560" width="280" height="90" rx="45" fill="#f5f8fd"/>
+  <text x="1360" y="615" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#122f57">App servers</text>
+</svg>
