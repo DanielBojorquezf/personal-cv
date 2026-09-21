@@ -1,0 +1,36 @@
+---
+import { getAlternatePath, getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<nav class="lang-switch" aria-label={t.lang.label}>
+  <a href={getAlternatePath(Astro.url, 'en')} class:list={{ active: lang === 'en' }} hreflang="en" aria-current={lang === 'en' ? 'true' : undefined}>
+    <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true">
+      <rect width="20" height="14" fill="#f4f5f7" />
+      <g fill="#c8102e">
+        <rect width="20" height="2" />
+        <rect y="4" width="20" height="2" />
+        <rect y="8" width="20" height="2" />
+        <rect y="12" width="20" height="2" />
+      </g>
+      <rect width="9" height="8" fill="#2a4a8b" />
+      <g fill="#f4f5f7">
+        <circle cx="2.2" cy="2" r="0.5" /><circle cx="4.5" cy="2" r="0.5" /><circle cx="6.8" cy="2" r="0.5" />
+        <circle cx="3.3" cy="4" r="0.5" /><circle cx="5.6" cy="4" r="0.5" />
+        <circle cx="2.2" cy="6" r="0.5" /><circle cx="4.5" cy="6" r="0.5" /><circle cx="6.8" cy="6" r="0.5" />
+      </g>
+    </svg>
+    <span>{t.lang.en}</span>
+  </a>
+  <a href={getAlternatePath(Astro.url, 'es')} class:list={{ active: lang === 'es' }} hreflang="es" aria-current={lang === 'es' ? 'true' : undefined}>
+    <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true">
+      <rect width="20" height="14" fill="#f4f5f7" />
+      <rect width="6.7" height="14" fill="#006847" />
+      <rect x="13.3" width="6.7" height="14" fill="#ce1126" />
+      <circle cx="10" cy="7" r="1.9" fill="#7c5a33" />
+    </svg>
+    <span>{t.lang.es}</span>
+  </a>
+</nav>

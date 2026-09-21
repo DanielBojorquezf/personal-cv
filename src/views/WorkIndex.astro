@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Work from '../components/Work.astro';
+import { useTranslations } from '../i18n/translations';
+import { getLangFromUrl } from '../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<BaseLayout current="work" title={t.work.pageTitle} description={t.work.pageDescription}>
+  <Work />
+</BaseLayout>

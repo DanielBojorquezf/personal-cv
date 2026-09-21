@@ -1,0 +1,23 @@
+---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+<section id="process" class="process section-bg">
+  <div class="container">
+    <div class="section-title">
+      <h2>{t.process.title}</h2>
+      <p>{t.process.body}</p>
+    </div>
+    <ol class="process-steps">
+      {t.process.steps.map((step, index) => (
+        <li>
+          <span class="process-index">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

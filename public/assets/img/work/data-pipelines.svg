@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Data collection pipelines</title>
+  <desc id="desc">Four pipeline stages from fetch to store</desc>
+  <rect width="960" height="540" fill="#0B1B33"/>
+  <text x="48" y="64" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">Fetch � parse � store</text>
+  <rect x="56" y="160" width="190" height="180" rx="10" fill="#173B6C"/>
+  <text x="151" y="220" text-anchor="middle" fill="#8EC8D8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">01</text>
+  <text x="151" y="252" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Fetch</text>
+  <text x="151" y="284" text-anchor="middle" fill="#D6E0EE" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Source pages</text>
+  <rect x="276" y="160" width="190" height="180" rx="10" fill="#173B6C"/>
+  <text x="371" y="220" text-anchor="middle" fill="#8EC8D8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">02</text>
+  <text x="371" y="252" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Parse</text>
+  <text x="371" y="284" text-anchor="middle" fill="#D6E0EE" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Normalize rows</text>
+  <rect x="496" y="160" width="190" height="180" rx="10" fill="#149DDD"/>
+  <text x="591" y="220" text-anchor="middle" fill="#E4EDF9" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">03</text>
+  <text x="591" y="252" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Store</text>
+  <text x="591" y="284" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">PostgreSQL</text>
+  <rect x="716" y="160" width="190" height="180" rx="10" fill="#173B6C"/>
+  <text x="811" y="220" text-anchor="middle" fill="#8EC8D8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">04</text>
+  <text x="811" y="252" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Alert</text>
+  <text x="811" y="284" text-anchor="middle" fill="#D6E0EE" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">Cron + queue</text>
+  <path d="M246 250 H276" stroke="#8EC8D8" stroke-width="3"/>
+  <path d="M466 250 H496" stroke="#8EC8D8" stroke-width="3"/>
+  <path d="M686 250 H716" stroke="#8EC8D8" stroke-width="3"/>
+</svg>

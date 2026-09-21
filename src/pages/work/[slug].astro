@@ -1,0 +1,20 @@
+---
+import WorkDemo from '../../views/WorkDemo.astro';
+import { getWork, getWorks } from '../../lib/work';
+
+export function getStaticPaths() {
+  return getWorks().map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const work = item ?? getWork(Astro.params.slug ?? '');
+
+if (!work) {
+  throw new Error('Work item not found');
+}
+---
+
+<WorkDemo item={work} />

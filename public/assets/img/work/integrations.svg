@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Payments and messaging</title>
+  <desc id="desc">WhatsApp, webhook, app, and payment boxes connected by arrows</desc>
+  <rect width="960" height="540" fill="#0B1B33"/>
+  <text x="48" y="64" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">Event in, action out</text>
+  <rect x="80" y="160" width="180" height="100" rx="10" fill="#173B6C"/>
+  <text x="170" y="218" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">WhatsApp</text>
+  <rect x="390" y="160" width="180" height="100" rx="10" fill="#149DDD"/>
+  <text x="480" y="218" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">Webhook</text>
+  <rect x="700" y="160" width="180" height="100" rx="10" fill="#173B6C"/>
+  <text x="790" y="218" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">App API</text>
+  <rect x="230" y="360" width="180" height="100" rx="10" fill="#F5F8FD"/>
+  <text x="320" y="418" text-anchor="middle" fill="#173B6C" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">Queue</text>
+  <rect x="550" y="360" width="180" height="100" rx="10" fill="#F5F8FD"/>
+  <text x="640" y="418" text-anchor="middle" fill="#173B6C" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700">Payment</text>
+  <path d="M260 210 H390" stroke="#8EC8D8" stroke-width="3"/>
+  <polygon points="390,204 402,210 390,216" fill="#8EC8D8"/>
+  <path d="M570 210 H700" stroke="#8EC8D8" stroke-width="3"/>
+  <polygon points="700,204 712,210 700,216" fill="#8EC8D8"/>
+  <path d="M480 260 V360" stroke="#8EC8D8" stroke-width="3"/>
+  <path d="M320 360 V260" stroke="#8EC8D8" stroke-width="3"/>
+  <path d="M790 260 V410 H730" stroke="#8EC8D8" stroke-width="3" fill="none"/>
+</svg>

@@ -1,0 +1,49 @@
+---
+import { formatPostDate, getCategoryLabel, getPostUrlSlug, getPublishedPosts } from '../lib/blog';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const blogPath = localizedPath(lang, '/blog');
+const posts = (await getPublishedPosts(lang)).slice(0, 3);
+---
+<section id="notes" class="notes">
+  <div class="container">
+    <div class="section-title">
+      <h2>{t.notes.title}</h2>
+      <p>{t.notes.body}</p>
+    </div>
+    <div class="blog-list">
+      {posts.map((post) => {
+        const href = `${blogPath}/${getPostUrlSlug(post)}`;
+        return (
+          <article class="blog-card">
+            {post.data.heroImage && (
+              <a class="blog-card-media" href={href}>
+                <img src={post.data.heroImage} alt={post.data.heroImageAlt ?? post.data.title} />
+              </a>
+            )}
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <a class="blog-category" href={`${blogPath}?category=${post.data.category}`}>
+                  {getCategoryLabel(post.data.category, lang)}
+                </a>
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {formatPostDate(post.data.pubDate, lang)}
+                </time>
+              </div>
+              <h3>
+                <a href={href}>{post.data.title}</a>
+              </h3>
+              <p>{post.data.description}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <p class="notes-more">
+      <a href={blogPath}>{t.notes.all}</a>
+    </p>
+  </div>
+</section>

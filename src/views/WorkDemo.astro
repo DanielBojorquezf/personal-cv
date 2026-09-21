@@ -1,0 +1,291 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { WorkItem } from '../lib/work';
+import { getWorkCopy } from '../lib/work';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+
+interface Props {
+  item: WorkItem;
+}
+
+const { item } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const copy = getWorkCopy(item, lang);
+const homePath = localizedPath(lang, '/');
+const workPath = localizedPath(lang, '/work');
+
+const demo = {
+  en: {
+    builder: {
+      blocks: ['Heading', 'Text', 'Button', 'Image'],
+      canvasTitle: 'Launch next week',
+      canvasBody: 'A short page assembled from blocks. The export is HTML and CSS, not a picture of a page.',
+      button: 'Get a demo',
+      propsTitle: 'Selected block',
+      props: {
+        Heading: 'Renders an h1. You set the copy and the size.',
+        Text: 'A paragraph. Keep it short enough to read on a phone.',
+        Button: 'A link that looks like an action. One per section is enough.',
+        Image: 'A figure with alt text. The builder stores the URL, not the file in the database.',
+      },
+    },
+    aws: {
+      hops: [
+        { id: 'dns', title: 'Route 53', body: 'The name becomes an address. Alias records track CloudFront or an ALB when the IP moves.' },
+        { id: 'edge', title: 'CloudFront', body: 'Static assets and TLS live at the edge. Most visits never reach the API.' },
+        { id: 'door', title: 'ALB / API Gateway', body: 'The front door. ALB for a long-lived app. API Gateway when you sell an API or wake Lambda.' },
+        { id: 'compute', title: 'ECS / Lambda', body: 'ECS for a container that stays up. Lambda for a job that starts, works, and leaves.' },
+      ],
+    },
+    pipeline: {
+      stages: ['Fetch', 'Parse', 'Store', 'Alert'],
+      rows: [
+        ['store-a.com/p/1', 'Blue chair', '$120', 'ok'],
+        ['store-a.com/p/2', 'Oak desk', '$340', 'ok'],
+        ['store-b.com/p/9', 'Lamp', '—', 'skipped'],
+      ],
+      headers: ['Source', 'Title', 'Price', 'Status'],
+      run: 'Run job',
+    },
+    integrations: {
+      steps: [
+        { title: 'WhatsApp', body: 'A customer sends a message or taps a paid-order template.' },
+        { title: 'Webhook', body: 'The provider POSTs the event. Verify the signature before you trust it.' },
+        { title: 'Queue', body: 'SQS or a Laravel job so a slow worker does not drop the HTTP request.' },
+        { title: 'Action', body: 'Reply, mark the invoice paid, or open a ticket. One event, one job.' },
+      ],
+    },
+  },
+  es: {
+    builder: {
+      blocks: ['Título', 'Texto', 'Botón', 'Imagen'],
+      canvasTitle: 'Lanzamos la otra semana',
+      canvasBody: 'Una página corta armada con bloques. El export es HTML y CSS, no la foto de una página.',
+      button: 'Pedir un demo',
+      propsTitle: 'Bloque seleccionado',
+      props: {
+        Título: 'Sale un h1. Tú pones el texto y el tamaño.',
+        Texto: 'Un párrafo. Que se pueda leer en el teléfono.',
+        Botón: 'Un enlace que se ve como acción. Uno por sección alcanza.',
+        Imagen: 'Una figura con alt. El builder guarda la URL, no el archivo en la base.',
+      },
+    },
+    aws: {
+      hops: [
+        { id: 'dns', title: 'Route 53', body: 'El nombre se vuelve dirección. Los alias siguen a CloudFront o a un ALB cuando la IP se mueve.' },
+        { id: 'edge', title: 'CloudFront', body: 'Estáticos y TLS en el edge. La mayoría de visitas no toca el API.' },
+        { id: 'door', title: 'ALB / API Gateway', body: 'La puerta. ALB para una app que se queda arriba. API Gateway si vendes un API o despiertas Lambda.' },
+        { id: 'compute', title: 'ECS / Lambda', body: 'ECS para un contenedor que vive. Lambda para un job que arranca, trabaja y se va.' },
+      ],
+    },
+    pipeline: {
+      stages: ['Traer', 'Parsear', 'Guardar', 'Avisar'],
+      rows: [
+        ['store-a.com/p/1', 'Silla azul', '$120', 'ok'],
+        ['store-a.com/p/2', 'Escritorio', '$340', 'ok'],
+        ['store-b.com/p/9', 'Lámpara', '—', 'omitido'],
+      ],
+      headers: ['Fuente', 'Título', 'Precio', 'Estado'],
+      run: 'Correr job',
+    },
+    integrations: {
+      steps: [
+        { title: 'WhatsApp', body: 'Un cliente manda un mensaje o toca una plantilla de pedido pagado.' },
+        { title: 'Webhook', body: 'El proveedor hace POST del evento. Verifica la firma antes de creerle.' },
+        { title: 'Cola', body: 'SQS o un job de Laravel para que un worker lento no tire el HTTP.' },
+        { title: 'Acción', body: 'Responder, marcar la factura pagada o abrir un ticket. Un evento, un job.' },
+      ],
+    },
+  },
+} as const;
+
+const d = demo[lang];
+---
+
+<BaseLayout current="work" title={`${copy.title} | Daniel Bojorquez`} description={copy.summary}>
+  <section class="work-demo">
+    <div class="container">
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href={homePath}>{t.blog.home}</a></li>
+          <li><a href={workPath}>{t.work.title}</a></li>
+          <li>{copy.title}</li>
+        </ol>
+      </div>
+
+      <div class="section-title">
+        <h2>{copy.title}</h2>
+        <p>{copy.summary}</p>
+      </div>
+
+      <figure class="blog-hero">
+        <img src={item.image} alt={copy.title} />
+      </figure>
+
+      <aside class="work-meta">
+        <p><strong>{t.work.role}:</strong> {copy.role}</p>
+        <p><strong>{t.work.year}:</strong> {copy.year}</p>
+        <p><strong>{t.work.stack}:</strong> {item.stack.join(', ')}</p>
+      </aside>
+      <p class="work-demo-note">{t.work.demoNote}</p>
+
+      {item.slug === 'html-css-builder' && (
+        <div class="demo-shell" id="demo-builder" data-demo="builder">
+          <div class="demo-palette" role="list">
+            {d.builder.blocks.map((block, index) => (
+              <button type="button" class:list={['demo-chip', { active: index === 0 }]} data-block={block}>{block}</button>
+            ))}
+          </div>
+          <div class="demo-canvas">
+            <h3>{d.builder.canvasTitle}</h3>
+            <p>{d.builder.canvasBody}</p>
+            <span class="demo-fake-btn">{d.builder.button}</span>
+          </div>
+          <div class="demo-props">
+            <h3>{d.builder.propsTitle}</h3>
+            <p data-prop-output>{d.builder.props[d.builder.blocks[0]]}</p>
+          </div>
+        </div>
+      )}
+
+      {item.slug === 'aws-path' && (
+        <div class="demo-shell demo-hops" id="demo-aws" data-demo="aws">
+          <div class="demo-hop-list">
+            {d.aws.hops.map((hop, index) => (
+              <button type="button" class:list={['demo-chip', { active: index === 0 }]} data-hop={hop.id}>{hop.title}</button>
+            ))}
+          </div>
+          <div class="demo-props">
+            {d.aws.hops.map((hop, index) => (
+              <p data-hop-panel={hop.id} hidden={index !== 0}>{hop.body}</p>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {item.slug === 'data-pipelines' && (
+        <div class="demo-shell" id="demo-pipeline" data-demo="pipeline">
+          <div class="demo-hop-list">
+            {d.pipeline.stages.map((stage, index) => (
+              <span class:list={['demo-chip', { active: index === 0 }]} data-stage={index}>{stage}</span>
+            ))}
+          </div>
+          <p>
+            <button type="button" class="demo-run" data-run-pipeline>{d.pipeline.run}</button>
+          </p>
+          <div class="demo-table-wrap">
+            <table class="demo-table">
+              <thead>
+                <tr>
+                  {d.pipeline.headers.map((header) => <th>{header}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {d.pipeline.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => <td>{cell}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {item.slug === 'integrations' && (
+        <div class="demo-shell demo-hops" id="demo-integrations" data-demo="integrations">
+          <div class="demo-hop-list">
+            {d.integrations.steps.map((step, index) => (
+              <button type="button" class:list={['demo-chip', { active: index === 0 }]} data-step={index}>{step.title}</button>
+            ))}
+          </div>
+          <div class="demo-props">
+            {d.integrations.steps.map((step, index) => (
+              <p data-step-panel={index} hidden={index !== 0}>{step.body}</p>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <p class="blog-back">
+        <a href={workPath}><i class="bx bx-left-arrow-alt"></i> {t.work.back}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var builder = document.getElementById('demo-builder');
+    if (builder) {
+      var props = {
+        Heading: 'Renders an h1. You set the copy and the size.',
+        Text: 'A paragraph. Keep it short enough to read on a phone.',
+        Button: 'A link that looks like an action. One per section is enough.',
+        Image: 'A figure with alt text. The builder stores the URL, not the file in the database.',
+        'Título': 'Sale un h1. Tú pones el texto y el tamaño.',
+        'Texto': 'Un párrafo. Que se pueda leer en el teléfono.',
+        'Botón': 'Un enlace que se ve como acción. Uno por sección alcanza.',
+        'Imagen': 'Una figura con alt. El builder guarda la URL, no el archivo en la base.'
+      };
+      var out = builder.querySelector('[data-prop-output]');
+      builder.querySelectorAll('[data-block]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          builder.querySelectorAll('[data-block]').forEach(function (el) { el.classList.remove('active'); });
+          btn.classList.add('active');
+          if (out) out.textContent = props[btn.getAttribute('data-block')] || '';
+        });
+      });
+    }
+
+    var aws = document.getElementById('demo-aws');
+    if (aws) {
+      aws.querySelectorAll('[data-hop]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-hop');
+          aws.querySelectorAll('[data-hop]').forEach(function (el) { el.classList.remove('active'); });
+          btn.classList.add('active');
+          aws.querySelectorAll('[data-hop-panel]').forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-hop-panel') !== id;
+          });
+        });
+      });
+    }
+
+    var pipeline = document.getElementById('demo-pipeline');
+    if (pipeline) {
+      var stages = pipeline.querySelectorAll('[data-stage]');
+      var run = pipeline.querySelector('[data-run-pipeline]');
+      if (run) {
+        run.addEventListener('click', function () {
+          var i = 0;
+          stages.forEach(function (el) { el.classList.remove('active'); });
+          function tick() {
+            if (i < stages.length) {
+              stages[i].classList.add('active');
+              i += 1;
+              window.setTimeout(tick, 280);
+            }
+          }
+          tick();
+        });
+      }
+    }
+
+    var integrations = document.getElementById('demo-integrations');
+    if (integrations) {
+      integrations.querySelectorAll('[data-step]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-step');
+          integrations.querySelectorAll('[data-step]').forEach(function (el) { el.classList.remove('active'); });
+          btn.classList.add('active');
+          integrations.querySelectorAll('[data-step-panel]').forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-step-panel') !== id;
+          });
+        });
+      });
+    }
+  })();
+</script>

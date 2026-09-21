@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">AWS path to production</title>
+  <desc id="desc">Request path from user through Route 53, CloudFront, and ECS</desc>
+  <rect width="960" height="540" fill="#0B1B33"/>
+  <text x="48" y="64" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700">User to compute</text>
+  <rect x="48" y="220" width="120" height="72" rx="8" fill="#149DDD"/>
+  <text x="108" y="262" text-anchor="middle" fill="#FFFFFF" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">User</text>
+  <path d="M178 256 H230" stroke="#8EC8D8" stroke-width="3"/>
+  <polygon points="230,250 242,256 230,262" fill="#8EC8D8"/>
+  <rect x="250" y="220" width="140" height="72" rx="8" fill="#173B6C"/>
+  <text x="320" y="262" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">Route 53</text>
+  <path d="M400 256 H452" stroke="#8EC8D8" stroke-width="3"/>
+  <polygon points="452,250 464,256 452,262" fill="#8EC8D8"/>
+  <rect x="472" y="220" width="150" height="72" rx="8" fill="#173B6C"/>
+  <text x="547" y="262" text-anchor="middle" fill="#F5F8FD" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">CloudFront</text>
+  <path d="M632 256 H684" stroke="#8EC8D8" stroke-width="3"/>
+  <polygon points="684,250 696,256 684,262" fill="#8EC8D8"/>
+  <rect x="704" y="148" width="208" height="72" rx="8" fill="#F5F8FD"/>
+  <text x="808" y="190" text-anchor="middle" fill="#173B6C" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">S3 static</text>
+  <rect x="704" y="292" width="208" height="72" rx="8" fill="#F5F8FD"/>
+  <text x="808" y="334" text-anchor="middle" fill="#173B6C" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700">ECS / Lambda</text>
+  <path d="M696 256 C696 184 704 184 704 184" stroke="#8EC8D8" stroke-width="3" fill="none"/>
+  <path d="M696 256 C696 328 704 328 704 328" stroke="#8EC8D8" stroke-width="3" fill="none"/>
+  <text x="48" y="480" fill="#8EC8D8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14">DNS, edge, then compute. Delete the box that does not earn a sentence.</text>
+</svg>

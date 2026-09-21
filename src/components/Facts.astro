@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl } from '../i18n/utils';
-import { useTranslations } from '../i18n/translations';
+import { factIcons, useTranslations } from '../i18n/translations';
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
@@ -10,35 +10,16 @@ const t = useTranslations(getLangFromUrl(Astro.url));
       <h2>{t.facts.title}</h2>
       <p>{t.facts.body}</p>
     </div>
-    <div class="row no-gutters">
-      <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
-        <div class="count-box">
-          <i class="bi bi-emoji-smile"></i>
-          <span data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="1" class="purecounter"></span>
-          <p><strong>{t.facts.clients}</strong> {t.facts.clientsHint}</p>
+    <div class="row">
+      {t.facts.items.map((item, index) => (
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay={index * 100}>
+          <div class="fact-box">
+            <i class={`bi ${factIcons[index]}`} aria-hidden="true"></i>
+            <strong>{item.label}</strong>
+            <p>{item.hint}</p>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
-        <div class="count-box">
-          <i class="bi bi-journal-richtext"></i>
-          <span data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="1" class="purecounter"></span>
-          <p><strong>{t.facts.projects}</strong> {t.facts.projectsHint}</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
-        <div class="count-box">
-          <i class="bi bi-headset"></i>
-          <span data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="1" class="purecounter"></span>
-          <p><strong>{t.facts.hours}</strong> {t.facts.hoursHint}</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
-        <div class="count-box">
-          <i class="bi bi-people"></i>
-          <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="1" class="purecounter"></span>
-          <p><strong>{t.facts.workers}</strong> {t.facts.workersHint}</p>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero options</title>
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Raleway:400,500,600,700|JetBrains+Mono:400,500,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b1a2e;
+    --navy-2:#132b45;
+    --cyan:#149ddd;
+    --ink:#071320;
+    --sand:#e8d6bd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9edf2;font-family:"Raleway",sans-serif;padding:28px}
+  .label{font:700 13px "Poppins",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#4a5a6b;margin:34px 0 10px}
+  .frame{position:relative;width:1180px;height:640px;overflow:hidden;background:var(--navy);
+         box-shadow:0 18px 40px rgba(10,20,35,.22);zoom:.74}
+  .sidebar{position:absolute;left:0;top:0;bottom:0;width:250px;background:#040b14;z-index:9;
+           display:flex;flex-direction:column;align-items:center;padding-top:26px;gap:12px}
+  .sidebar .av{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center 28%;border:7px solid #2c2f3f}
+  .sidebar b{font:600 18px "Poppins",sans-serif;color:#fff}
+  .sidebar .nav{margin-top:14px;width:100%;padding:0 26px;display:flex;flex-direction:column;gap:17px}
+  .sidebar .nav span{font:400 14px "Raleway";color:#8c92a0}
+  .sidebar .nav span:first-child{color:var(--cyan)}
+  .stage{position:absolute;left:250px;top:0;right:0;bottom:0;overflow:hidden}
+
+  /* real DB badge cropped out of the existing photo */
+  .mark{position:relative;border-radius:50%;overflow:hidden;flex:none}
+  .mark img{position:absolute;width:calc(var(--s) * 4.49);left:calc(var(--s) * -3.123);top:calc(var(--s) * -.7368)}
+
+  .eyebrow{font:600 12px "Poppins",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+  h1{font:700 52px/1.06 "Poppins",sans-serif;color:#fff;letter-spacing:-.02em}
+  .line{font:400 20px/1.5 "Raleway";color:#dbe4ee}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{font:600 14px "Poppins",sans-serif;padding:12px 22px;border-radius:2px;background:var(--cyan);color:#fff}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font:500 12px "Poppins",sans-serif;color:#cfe1f0;border:1px solid rgba(255,255,255,.28);
+        border-radius:999px;padding:6px 13px;background:rgba(255,255,255,.07)}
+
+  /* ---------- A: editorial split ---------- */
+  #a .stage{display:grid;grid-template-columns:1.05fr .95fr;background:linear-gradient(160deg,#0d1f36,#07131f)}
+  #a .copy{padding:0 46px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+  #a .shot{position:relative;margin:26px 26px 26px 0;border-radius:4px;overflow:hidden}
+  #a .shot img.bg{width:100%;height:100%;object-fit:cover}
+  #a .shot:after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(11,26,46,0) 40%,rgba(11,26,46,.6))}
+  #a .badge{position:absolute;left:436px;bottom:58px;z-index:5;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+  #a .rule{width:54px;height:3px;background:var(--cyan)}
+
+  /* ---------- B: terminal forward ---------- */
+  #b .stage{background:url('/assets/img/hero-bg.jpg') center 45%/cover}
+  #b .stage:before{content:"";position:absolute;inset:0;
+    background:linear-gradient(105deg,rgba(6,15,26,.9) 0%,rgba(6,15,26,.55) 48%,rgba(6,15,26,.15) 100%)}
+  #b .copy{position:absolute;left:52px;top:96px;width:430px;display:flex;flex-direction:column;gap:18px;z-index:3}
+  #b .term{position:absolute;right:44px;bottom:54px;width:452px;border-radius:9px;overflow:hidden;z-index:4;
+           background:#0c1622;border:1px solid rgba(255,255,255,.14);box-shadow:0 26px 50px rgba(0,0,0,.5)}
+  #b .term .bar{height:30px;background:#16212f;display:flex;align-items:center;gap:7px;padding:0 12px}
+  #b .term .bar i{width:10px;height:10px;border-radius:50%;background:#ff5f57}
+  #b .term .bar i:nth-child(2){background:#febc2e}
+  #b .term .bar i:nth-child(3){background:#28c840}
+  #b .term .bar span{margin-left:10px;font:500 11px "JetBrains Mono";color:#7d8b9c}
+  #b .term pre{padding:15px 17px 19px;font:400 12.5px/1.85 "JetBrains Mono";color:#9fb3c8}
+  #b .term .p{color:var(--cyan)}
+  #b .term .g{color:#5dff9a}
+  #b .term .w{color:#ffd166}
+  #b .cur{display:inline-block;width:7px;height:14px;background:#5dff9a;vertical-align:-2px}
+  #b .cloudpill{position:absolute;right:92px;top:80px;display:flex;align-items:center;gap:9px;z-index:4;
+      background:rgba(255,255,255,.92);border-radius:999px;padding:9px 17px;font:600 13px "Poppins";color:#0b1a2e;
+      box-shadow:0 10px 26px rgba(0,0,0,.3)}
+  #b svg.arc{position:absolute;right:40px;top:100px;z-index:3}
+
+  /* ---------- C: duotone + line art ---------- */
+  #c .stage{background:var(--navy)}
+  #c .duo{position:absolute;inset:0;
+          background-image:linear-gradient(150deg,#0b2244,#0d5f8f 55%,#18a7e2),
+                           url('/assets/img/hero-bg.jpg');
+          background-size:cover,cover;
+          background-position:center,center 45%;
+          background-blend-mode:color;
+          filter:contrast(1.08) saturate(1.15)}
+  #c .veil{position:absolute;inset:0;background:linear-gradient(115deg,rgba(6,18,32,.86),rgba(6,18,32,.3) 62%,rgba(6,18,32,.55))}
+  #c .copy{position:absolute;left:54px;top:104px;width:470px;display:flex;flex-direction:column;gap:18px;z-index:3}
+  #c svg.art{position:absolute;right:0;bottom:0;width:640px;z-index:3;opacity:.95}
+
+  /* ---------- D: grounded band ---------- */
+  #d .stage{background:#08121f}
+  #d .photo{position:absolute;left:0;right:0;top:0;height:60%;
+            background:url('/assets/img/hero-bg.jpg') center 38%/cover}
+  #d .photo:after{content:"";position:absolute;inset:0;
+     background:linear-gradient(180deg,rgba(7,18,31,.72),rgba(7,18,31,.15) 45%,rgba(8,18,31,.98))}
+  #d .copy{position:absolute;left:54px;top:78px;width:520px;display:flex;flex-direction:column;gap:16px;z-index:4}
+  #d .band{position:absolute;left:0;right:0;bottom:0;height:40%;
+           background:linear-gradient(180deg,#0a1728,#0b1a2e);border-top:1px solid rgba(20,157,221,.35)}
+  #d .band .inner{position:absolute;left:54px;width:470px;bottom:34px;display:flex;justify-content:space-between;align-items:flex-end}
+  #d .stat b{display:block;font:700 26px "Poppins";color:#fff}
+  #d .stat span{font:400 13px "Raleway";color:#8fa4b8}
+  #d svg.art{position:absolute;right:52px;bottom:calc(40% - 14px);width:390px;z-index:5;
+             filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+
+  /* ---------- E: portrait led ---------- */
+  #e .stage{background:url('/assets/img/hero-bg.jpg') center 42%/cover}
+  #e .stage:before{content:"";position:absolute;inset:0;backdrop-filter:blur(3px);
+     background:radial-gradient(120% 90% at 30% 40%,rgba(6,16,28,.55),rgba(5,12,22,.93))}
+  #e .wrap{position:absolute;inset:0;display:flex;align-items:center;gap:44px;padding:0 60px;z-index:3}
+  #e .port{position:relative;flex:none}
+  #e .port img{width:268px;height:268px;border-radius:50%;object-fit:cover;object-position:center 26%;
+               border:3px solid rgba(255,255,255,.18)}
+  #e .port .ring{position:absolute;inset:-14px;border-radius:50%;border:1px dashed rgba(20,157,221,.7)}
+  #e .port .mk{position:absolute;right:-16px;bottom:-8px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+  #e .copy{display:flex;flex-direction:column;gap:18px}
+
+  /* ---------- F: glass rail ---------- */
+  #f .stage{background:url('/assets/img/hero-bg.jpg') center 50%/cover}
+  #f .stage:before{content:"";position:absolute;inset:0;
+     background:linear-gradient(100deg,rgba(6,15,26,.88),rgba(6,15,26,.4) 60%,rgba(6,15,26,.2))}
+  #f .copy{position:absolute;left:54px;top:110px;width:420px;display:flex;flex-direction:column;gap:18px;z-index:3}
+  #f .rail{position:absolute;right:44px;top:70px;bottom:70px;width:300px;display:flex;flex-direction:column;gap:12px;z-index:4}
+  #f .card{flex:1;border-radius:10px;padding:16px 18px;background:rgba(255,255,255,.1);
+           border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(9px);display:flex;flex-direction:column;justify-content:center;gap:4px}
+  #f .card b{font:600 15px "Poppins";color:#fff}
+  #f .card span{font:400 12.5px/1.5 "Raleway";color:#c3d3e2}
+  #f .card i{font:700 11px "Poppins";letter-spacing:.16em;color:var(--cyan);font-style:normal}
+</style>
+</head>
+<body>
+
+<!-- ============ A ============ -->
+<div class="label">Option A — Editorial split</div>
+<div class="frame" id="a">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="copy">
+      <div class="eyebrow">Hermosillo · Sonora · México</div>
+      <h1>Full-stack engineer<br>for the long haul.</h1>
+      <div class="rule"></div>
+      <p class="line">Nine years taking features from the UI through the API and onto AWS — and keeping them up afterwards.</p>
+      <div class="btns"><a class="btn">See selected work</a><a class="btn ghost">Download CV</a></div>
+      <div class="chips"><span class="chip">9 years shipping</span><span class="chip">ECS · Lambda · CloudFront</span><span class="chip">Docker · CI/CD</span></div>
+    </div>
+    <div class="shot">
+      <img class="bg" src="/assets/img/hero-bg.jpg">
+    </div>
+    <div class="mark badge" style="--s:104px;width:104px;height:104px"><img src="/assets/img/hero-bg-icon.jpeg"></div>
+  </div>
+</div>
+
+<!-- ============ B ============ -->
+<div class="label">Option B — Terminal forward (no illustrated person)</div>
+<div class="frame" id="b">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="copy">
+      <div class="eyebrow">From the Sonora desert</div>
+      <h1>Careful code,<br>shipped to the world.</h1>
+      <p class="line">Web products, APIs, and the AWS path that keeps them running.</p>
+      <div class="btns"><a class="btn">See selected work</a><a class="btn ghost">Download CV</a></div>
+    </div>
+    <svg class="arc" width="330" height="230" viewBox="0 0 330 230" fill="none">
+      <path d="M300 200 C250 150 140 130 40 52" stroke="#7fdbff" stroke-width="2" stroke-dasharray="6 9" opacity=".85"/>
+      <circle cx="170" cy="126" r="4" fill="#7fdbff"/>
+      <circle cx="96" cy="88" r="3" fill="#149ddd"/>
+    </svg>
+    <div class="cloudpill">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M4.5 13h11a3.5 3.5 0 0 0 .4-7A5 5 0 0 0 6.2 4.4A3.8 3.8 0 0 0 4.5 13z" fill="#149ddd"/></svg>
+      CloudFront · ECS
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>~/aws-cv — zsh</span></div>
+<pre><span class="p">❯</span> docker build -t api:2026.09 .
+<span class="g">✓</span> 14 layers cached · 2.1s
+<span class="p">❯</span> aws ecs update-service --force-new-deployment
+<span class="g">✓</span> service api  <span class="w">1 → 2 tasks</span>  steady
+<span class="p">❯</span> curl -s https://api.example.mx/health
+<span class="g">{"status":"ok","region":"us-west-2"}</span>
+<span class="p">❯</span> <span class="cur"></span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- ============ C ============ -->
+<div class="label">Option C — Brand duotone + single-weight line art</div>
+<div class="frame" id="c">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="duo"></div><div class="veil"></div>
+    <div class="copy">
+      <div class="eyebrow">From the Sonora desert</div>
+      <h1>Careful code,<br>shipped to the world.</h1>
+      <p class="line">Nine years of web products, APIs, and AWS — built to stay up.</p>
+      <div class="btns"><a class="btn">See selected work</a><a class="btn ghost">Download CV</a></div>
+    </div>
+    <svg class="art" viewBox="0 0 640 260" fill="none" stroke="#8fe4ff" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 236h640" opacity=".45"/>
+      <!-- cactus -->
+      <path d="M62 236v-92M62 176h-18v-26M62 190h18v-20" opacity=".8"/>
+      <!-- desk + laptop -->
+      <path d="M186 236v-40M330 236v-40M170 196h176"/>
+      <path d="M212 196l14-58h74l14 58" />
+      <path d="M232 152h60M232 168h44M232 182h30" opacity=".75"/>
+      <!-- mug -->
+      <path d="M352 196v-16h18v16zM370 184h7a5 5 0 0 1 0 8h-7"/>
+      <path d="M356 172c0-7 6-7 6-13" opacity=".6"/>
+      <!-- chair + seated figure -->
+      <path d="M468 236v-34M528 236v-34M452 202h92"/>
+      <path d="M544 202v-92" opacity=".8"/>
+      <circle cx="486" cy="112" r="17"/>
+      <path d="M470 108a16 16 0 0 1 32 0" opacity=".7"/>
+      <path d="M486 129c22 0 34 16 34 34v39h-62v-39c0-18 10-34 28-34z"/>
+      <path d="M478 148c-24 6-44 22-58 34" />
+      <!-- uplink -->
+      <path d="M352 118C420 66 508 52 592 76" stroke-dasharray="6 9" opacity=".8"/>
+      <path d="M556 46h44a20 20 0 0 1 0 40h-52a22 22 0 0 1 0-44c4-10 16-14 24-8"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ============ D ============ -->
+<div class="label">Option D — Grounded band (illustration stands on a real horizon)</div>
+<div class="frame" id="d">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="photo"></div>
+    <div class="copy">
+      <div class="eyebrow">From the Sonora desert</div>
+      <h1>Careful code,<br>shipped to the world.</h1>
+      <p class="line">Web products, APIs, and the AWS path behind them.</p>
+    </div>
+    <div class="band">
+      <div class="inner">
+        <div class="stat"><b>9 yrs</b><span>shipping web products</span></div>
+        <div class="stat"><b>AWS</b><span>ECS · Lambda · CloudFront</span></div>
+        <div class="stat"><b>Docker</b><span>images, CI, and delivery</span></div>
+      </div>
+    </div>
+    <svg class="art" viewBox="0 0 430 200" fill="none">
+      <ellipse cx="215" cy="190" rx="150" ry="9" fill="#000" opacity=".35"/>
+      <g stroke="#0b1a2e" stroke-width="2.4" stroke-linejoin="round">
+        <rect x="52" y="54" width="118" height="78" rx="9" fill="#eef5fb"/>
+        <rect x="61" y="63" width="100" height="56" rx="5" fill="#0d2a1e"/>
+        <path d="M74 78l7 5-7 5M90 88h22M74 100h26" stroke="#5dff9a" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M40 140h142" stroke-width="6" stroke-linecap="round"/>
+        <path d="M60 143v40M164 143v40" stroke-width="5" stroke-linecap="round"/>
+        <rect x="188" y="112" width="18" height="21" rx="4" fill="#c23b34"/>
+        <path d="M206 117c8 0 8 11 0 11"/>
+        <rect x="252" y="128" width="112" height="15" rx="7" fill="#f3e6d4"/>
+        <path d="M348 40c10 2 15 10 15 22v82h-17V54c0-8 1-14 2-14z" fill="#2a2118"/>
+        <path d="M266 143v40M348 143v40" stroke-width="5" stroke-linecap="round"/>
+        <path d="M262 128h86c5 0 7 4 5 9l-5 8h-90c-6 0-7-6-3-12 2-3 4-5 7-5z" fill="#173b6c"/>
+        <rect x="270" y="66" width="46" height="62" rx="15" fill="#e29a5a"/>
+        <circle cx="292" cy="44" r="17" fill="#f0c49a"/>
+        <path d="M275 41c3-15 32-15 34 2-9-4-25-4-34-2z" fill="#1b4332"/>
+        <path d="M278 84C244 94 218 112 200 126" stroke="#f0c49a" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      <path d="M180 60C240 22 320 12 398 30" stroke="#149ddd" stroke-width="2" stroke-dasharray="5 8"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ============ E ============ -->
+<div class="label">Option E — Portrait led (no illustration at all)</div>
+<div class="frame" id="e">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="wrap">
+      <div class="port">
+        <div class="ring"></div>
+        <img src="/assets/img/profile-img.jpg">
+        <div class="mark mk" style="--s:86px;width:86px;height:86px"><img src="/assets/img/hero-bg-icon.jpeg"></div>
+      </div>
+      <div class="copy">
+        <div class="eyebrow">Hermosillo · Sonora</div>
+        <h1>Careful code,<br>shipped to the world.</h1>
+        <p class="line">I build web products and the systems around them — apps, APIs, deploys, and the automation nobody wants to do twice.</p>
+        <div class="btns"><a class="btn">See selected work</a><a class="btn ghost">Download CV</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ F ============ -->
+<div class="label">Option F — Glass proof rail</div>
+<div class="frame" id="f">
+  <div class="sidebar">
+    <img class="av" src="/assets/img/profile-img.jpg"><b>Daniel Bojorquez</b>
+    <div class="nav"><span>Home</span><span>About</span><span>Work</span><span>Resume</span><span>Services</span><span>Contact</span></div>
+  </div>
+  <div class="stage">
+    <div class="copy">
+      <div class="eyebrow">From the Sonora desert</div>
+      <h1>Careful code,<br>shipped to the world.</h1>
+      <p class="line">Nine years of full-stack work for teams in Mexico and abroad.</p>
+      <div class="btns"><a class="btn">See selected work</a><a class="btn ghost">Download CV</a></div>
+    </div>
+    <div class="rail">
+      <div class="card"><i>BUILD</i><b>Svelte · Angular · Laravel</b><span>Product UIs and APIs that live for years.</span></div>
+      <div class="card"><i>RUN</i><b>AWS in production</b><span>ECS, Fargate, Lambda, CloudFront, Route 53.</span></div>
+      <div class="card"><i>SHIP</i><b>Docker &amp; CI/CD</b><span>A release is a pipeline, not a weekend.</span></div>
+      <div class="card"><i>AI</i><b>Groq, Claude, local Ollama</b><span>Cloud when it earns it, local when it's private.</span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="hero-uplink" aria-hidden="true">
+  <div class="hero-cloud-pill">
+    <svg viewBox="0 0 20 14" width="20" height="14" fill="none">
+      <path d="M4.5 13h11a3.5 3.5 0 0 0 .4-7A5 5 0 0 0 6.2 4.4A3.8 3.8 0 0 0 4.5 13z" fill="#149ddd" />
+    </svg>
+    <span>CloudFront · ECS</span>
+  </div>
+
+  <svg class="hero-arc" viewBox="0 0 260 150" fill="none">
+    <path id="hero-arc-path" d="M16 144 C84 122 168 96 244 22" stroke="#7fdbff" stroke-width="2" stroke-dasharray="6 9" opacity="0.8" />
+    <circle class="hero-packet" r="4" fill="#7fdbff" opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.8;1" dur="7s" repeatCount="indefinite" />
+      <animateMotion dur="7s" repeatCount="indefinite">
+        <mpath href="#hero-arc-path" />
+      </animateMotion>
+    </circle>
+    <circle class="hero-packet" r="3" fill="#149ddd" opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.8;1" dur="7s" begin="3.5s" repeatCount="indefinite" />
+      <animateMotion dur="7s" begin="3.5s" repeatCount="indefinite">
+        <mpath href="#hero-arc-path" />
+      </animateMotion>
+    </circle>
+  </svg>
+
+  <div class="hero-term">
+    <div class="hero-term-bar">
+      <i></i><i></i><i></i>
+      <span>~/aws-cv — zsh</span>
+    </div>
+    <pre><code><span class="hero-term-row" style="--i:0"><span class="p">❯</span> docker build -t api:2026.09 .</span>
+<span class="hero-term-row" style="--i:1"><span class="g">✓</span> 14 layers cached · 2.1s</span>
+<span class="hero-term-row" style="--i:2"><span class="p">❯</span> aws ecs update-service --force-new-deployment</span>
+<span class="hero-term-row" style="--i:3"><span class="g">✓</span> service api  <span class="w">1 → 2 tasks</span>  steady</span>
+<span class="hero-term-row" style="--i:4"><span class="p">❯</span> curl -s https://api.example.mx/health</span>
+<span class="hero-term-row" style="--i:5"><span class="g">{'{"status":"ok","region":"us-west-2"}'}</span></span>
+<span class="hero-term-row" style="--i:6"><span class="p">❯</span> <b class="hero-term-cursor"></b></span></code></pre>
+  </div>
+</div>

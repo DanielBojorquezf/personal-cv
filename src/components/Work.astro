@@ -1,0 +1,35 @@
+---
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
+import { useTranslations } from '../i18n/translations';
+import { getWorkCopy, getWorks } from '../lib/work';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const workPath = localizedPath(lang, '/work');
+---
+<section id="work" class="work">
+  <div class="container">
+    <div class="section-title">
+      <h2>{t.work.title}</h2>
+      <p>{t.work.body}</p>
+    </div>
+    <div class="work-gallery">
+      {getWorks().map((item) => {
+        const copy = getWorkCopy(item, lang);
+        const href = `${workPath}/${item.slug}`;
+        return (
+          <article class="work-card">
+            <a class="work-card-media" href={href}>
+              <img src={item.image} alt={copy.title} />
+            </a>
+            <div class="work-card-body">
+              <h3><a href={href}>{copy.title}</a></h3>
+              <p>{copy.summary}</p>
+              <a class="work-card-link" href={href}>{t.work.open}</a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

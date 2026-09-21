@@ -1,9 +1,9 @@
 ---
-import { getAlternatePath, getLangFromUrl, localizedPath } from '../i18n/utils';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
 import { useTranslations } from '../i18n/translations';
 
 interface Props {
-  current?: 'home' | 'blog';
+  current?: 'home' | 'blog' | 'work';
 }
 
 const { current = 'home' } = Astro.props;
@@ -12,6 +12,8 @@ const t = useTranslations(lang);
 const isHome = current === 'home';
 const homePath = localizedPath(lang, '/');
 const blogPath = localizedPath(lang, '/blog');
+const workPath = localizedPath(lang, '/work');
+const cvHref = lang === 'es' ? '/cv/daniel-bojorquez-es.pdf' : '/cv/daniel-bojorquez.pdf';
 const homeHash = (hash: string) => (isHome ? hash : `${homePath}${hash}`);
 ---
 <header id="header">
@@ -23,15 +25,13 @@ const homeHash = (hash: string) => (isHome ? hash : `${homePath}${hash}`);
           <a href="https://github.com/DanielBojorquezf" target="_blank" class="github"><i class="bx bxl-github"></i></a>
           <a href="https://www.linkedin.com/in/daniel-bojorquez" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
-        <nav class="lang-switch" aria-label={t.lang.label}>
-          <a href={getAlternatePath(Astro.url, 'en')} class:list={{ active: lang === 'en' }} hreflang="en">{t.lang.en}</a>
-          <a href={getAlternatePath(Astro.url, 'es')} class:list={{ active: lang === 'es' }} hreflang="es">{t.lang.es}</a>
-        </nav>
+        <a class="cv-link" href={cvHref} download>{t.cv.download}</a>
       </div>
       <nav id="navbar" class="nav-menu navbar">
         <ul>
           <li><a href={homeHash('#hero')} class:list={['nav-link', 'scrollto', { active: isHome }]}><i class="bx bx-home"></i> <span>{t.nav.home}</span></a></li>
           <li><a href={homeHash('#about')} class="nav-link scrollto"><i class="bx bx-user"></i> <span>{t.nav.about}</span></a></li>
+          <li><a href={isHome ? '#work' : workPath} class:list={['nav-link', 'scrollto', { active: current === 'work' }]}><i class="bx bx-briefcase"></i> <span>{t.nav.work}</span></a></li>
           <li><a href={homeHash('#resume')} class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>{t.nav.resume}</span></a></li>
           <li><a href={homeHash('#services')} class="nav-link scrollto"><i class="bx bx-server"></i> <span>{t.nav.services}</span></a></li>
           <li><a href={blogPath} class:list={['nav-link', { active: current === 'blog' }]}><i class="bx bx-book"></i> <span>{t.nav.blog}</span></a></li>
